@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto Moto Radar</title>
+  <meta name="description" content="Auto Moto Radar aggrega in una sola schermata gli annunci di auto e moto usate dalle principali fonti dell'usato in Italia, e ne stima il prezzo di mercato. Accesso su invito." />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <!-- Tema applicato PRIMA del CSS per evitare il flash (light di default). Chiave propria
+       della landing per non interferire con l'app. -->
+  <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('amr_landing_theme')||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}</script>
+  <link rel="stylesheet" href="./landing.css" />
+</head>
+<body>
+
+  <!-- ─── Topbar ─────────────────────────────────────────────────────────── -->
+  <header class="topbar">
+    <a class="brand" href="#hero" aria-label="Auto Moto Radar, torna su">
+      <!-- Logo radar (riuso da frontend/index.html:32-39) -->
+      <svg class="brand-logo" width="30" height="30" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="32" height="32" rx="6" fill="#1f6feb"/>
+        <circle cx="16" cy="16" r="10" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+        <circle cx="16" cy="16" r="5.5" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+        <circle cx="16" cy="16" r="1.8" fill="#bfdbfe"/>
+        <line x1="16" y1="6" x2="16" y2="3.5" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="26" y1="16" x2="28.5" y2="16" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">Auto Moto Radar</span>
+    </a>
+    <nav class="topnav" aria-label="Sezioni del sito">
+      <a href="#come-funziona">Come funziona</a>
+      <a href="#funzioni">Funzioni</a>
+      <a href="#roadmap">Roadmap</a>
+    </nav>
+    <span class="topbar-spacer"></span>
+    <a class="btn btn-primary topbar-cta" href="https://wa.me/393520727252" data-open-wizard>Richiedi accesso</a>
+    <button type="button" class="theme-toggle" id="themeToggle" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false">☾</button>
+  </header>
+
+  <main>
+
+    <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+    <section class="hero" id="hero">
+      <!-- Sfondo fotografico de-opacizzato (asset locale, Pexels License). Decorativo. -->
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <svg class="hero-logo" width="60" height="60" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="32" height="32" rx="6" fill="#1f6feb"/>
+            <circle cx="16" cy="16" r="10" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+            <circle cx="16" cy="16" r="5.5" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+            <circle cx="16" cy="16" r="1.8" fill="#bfdbfe"/>
+            <line x1="16" y1="6" x2="16" y2="3.5" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="26" y1="16" x2="28.5" y2="16" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <h1>Auto Moto Radar</h1>
+          <p class="lead lead-1">Trova e valuta auto e moto in pochi minuti.</p>
+          <p class="lead lead-2">Aggrega in una sola schermata gli annunci dalle principali fonti dell'usato in Italia, e ne stima il prezzo di mercato sui dati reali del momento.</p>
+          <div class="btn-row">
+            <a class="btn btn-dark" href="#funzioni">Scopri tutte le funzionalità</a>
+          </div>
+        </div>
+
+        <!-- Demo: ricerca che si auto-digita + mini risultati. Statica se no-JS/reduced-motion. -->
+        <div class="hero-demo fx" aria-hidden="true">
+          <div class="appwin">
+            <div class="appwin-bar"><span class="awd"></span><span class="awd"></span><span class="awd"></span><span class="appwin-title">Auto Moto Radar</span></div>
+            <div class="hero-demo-body">
+              <div class="search-fields hd-search">
+                <div class="ac-wrap hd-acwrap">
+                  <div class="field-input hd-field"><span id="hdQuery">BMW 320d Touring</span><span class="hd-caret"></span></div>
+                  <ul class="ac-list hd-aclist" id="hdAclist" hidden></ul>
+                </div>
+                <span class="btn-cerca">Cerca</span>
+              </div>
+              <div class="hd-results">
+                <div class="result-list" id="hdAuto">
+                  <div class="result-row best" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Milano</div></div><div class="row-prezzo">€ 12.500</div><div class="row-fonte"><span class="tag tag-subito">Fonte B</span></div></div>
+                  <div class="result-row" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Torino</div></div><div class="row-prezzo">€ 13.400</div><div class="row-fonte"><span class="tag tag-moto">Fonte C</span></div></div>
+                  <div class="result-row" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Bologna</div></div><div class="row-prezzo">€ 14.900</div><div class="row-fonte"><span class="tag tag-autoscout">Fonte A</span></div></div>
+                </div>
+                <div class="result-list" id="hdMoto" hidden>
+                  <div class="result-row best" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.2"/><circle cx="18.5" cy="17.5" r="3.2"/><path d="M5.5 17.5 9 10h5l2 3h2.5"/><path d="M9 10 8 8H6"/><path d="M14 10h3"/></svg></div><div class="row-main"><div class="row-titolo">Honda Africa Twin</div><div class="row-sub">Roma</div></div><div class="row-prezzo">€ 9.900</div><div class="row-fonte"><span class="tag tag-moto">Fonte C</span></div></div>
+                  <div class="result-row" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.2"/><circle cx="18.5" cy="17.5" r="3.2"/><path d="M5.5 17.5 9 10h5l2 3h2.5"/><path d="M9 10 8 8H6"/><path d="M14 10h3"/></svg></div><div class="row-main"><div class="row-titolo">Honda Africa Twin</div><div class="row-sub">Napoli</div></div><div class="row-prezzo">€ 10.500</div><div class="row-fonte"><span class="tag tag-subito">Fonte B</span></div></div>
+                  <div class="result-row" style="grid-template-columns:84px minmax(0,1fr) 104px 80px"><div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="3.2"/><circle cx="18.5" cy="17.5" r="3.2"/><path d="M5.5 17.5 9 10h5l2 3h2.5"/><path d="M9 10 8 8H6"/><path d="M14 10h3"/></svg></div><div class="row-main"><div class="row-titolo">Honda Africa Twin</div><div class="row-sub">Bari</div></div><div class="row-prezzo">€ 11.200</div><div class="row-fonte"><span class="tag tag-autoscout">Fonte A</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Come funziona (problema + due modi + showcase) ───────────────── -->
+    <section id="come-funziona">
+      <div class="wrap">
+        <p class="eyebrow">Come funziona</p>
+        <h2>Da tre siti a una lista</h2>
+        <p class="section-intro">Cercare un usato significa aprire siti diversi, ripetere la stessa ricerca e confrontare a mano. Auto Moto Radar fa il lavoro al posto tuo: unisce le fonti, ordina dal più economico ed evidenzia l'offerta migliore.</p>
+
+        <div class="ba">
+          <div class="ba-side ba-before">
+            <p class="ba-lab ba-lab-before">Senza Auto Moto Radar</p>
+            <div class="ba-mock" aria-hidden="true">
+              <div class="ba-win ba-win1"><div class="ba-win-bar">Fonte A</div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 14.900</span></div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 13.900</span></div></div>
+              <div class="ba-win ba-win2"><div class="ba-win-bar">Fonte B</div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 12.500</span></div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 15.200</span></div></div>
+              <div class="ba-win ba-win3"><div class="ba-win-bar">Fonte C</div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 13.400</span></div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 14.200</span></div></div>
+            </div>
+            <ul class="ba-pts ba-pts-before">
+              <li>3 siti diversi</li>
+              <li>stessa ricerca ripetuta</li>
+              <li>confronto a mano</li>
+            </ul>
+          </div>
+
+          <div class="ba-arrow" aria-hidden="true">→</div>
+
+          <div class="ba-side ba-after">
+            <p class="ba-lab ba-lab-after">Con Auto Moto Radar</p>
+            <!-- Dopo: lista unica ordinata (replica .result-row ridotta, dati finti). -->
+            <div class="fx ba-list" aria-hidden="true">
+              <div class="result-list">
+                <div class="result-row best" style="grid-template-columns:96px minmax(0,1fr) 112px 84px">
+                  <div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                  <div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Milano</div></div>
+                  <div class="row-prezzo">€ 12.500</div>
+                  <div class="row-fonte"><span class="tag tag-subito">Fonte B</span></div>
+                </div>
+                <div class="result-row" style="grid-template-columns:96px minmax(0,1fr) 112px 84px">
+                  <div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                  <div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Torino</div></div>
+                  <div class="row-prezzo">€ 13.400</div>
+                  <div class="row-fonte"><span class="tag tag-moto">Fonte C</span></div>
+                </div>
+                <div class="result-row" style="grid-template-columns:96px minmax(0,1fr) 112px 84px">
+                  <div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                  <div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Bologna</div></div>
+                  <div class="row-prezzo">€ 14.900</div>
+                  <div class="row-fonte"><span class="tag tag-autoscout">Fonte A</span></div>
+                </div>
+                <div class="result-row" style="grid-template-columns:96px minmax(0,1fr) 112px 84px">
+                  <div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                  <div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Firenze</div></div>
+                  <div class="row-prezzo">€ 15.200</div>
+                  <div class="row-fonte"><span class="tag tag-autoscout">Fonte B</span></div>
+                </div>
+              </div>
+            </div>
+            <ul class="ba-pts ba-pts-after">
+              <li>1 ricerca</li>
+              <li>1 lista ordinata</li>
+              <li>l'offerta migliore in evidenza</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="ba-impact">3 fonti <b>→</b> 1 vista · ordinati per prezzo · 0 schede da gestire</p>
+      </div>
+    </section>
+
+    <!-- ─── Funzioni (fonti personalizzabili + funzioni) ─────────────────── -->
+    <section id="funzioni">
+      <div class="wrap">
+        <p class="eyebrow">Le funzioni</p>
+        <h2>Tutto quello che puoi fare</h2>
+        <p class="section-intro">Ogni funzione dell'app. Scegli una voce a sinistra per vederla all'opera.</p>
+
+        <div class="fx-explorer fx" id="fxExplorer">
+          <div class="fx-tabs" id="fxTabs" role="tablist" aria-label="Funzioni dell'app" aria-orientation="vertical">
+            <button class="fx-tab" role="tab" id="fxt0" aria-controls="fxp0" aria-selected="true" tabindex="0" data-desc="Marca e modello dalla lista, più i filtri che servono: prezzo, anno, chilometri, regione e raggio."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span>Ricerca con filtri avanzati</span></button>
+            <button class="fx-tab" role="tab" id="fxt1" aria-controls="fxp1" aria-selected="false" tabindex="-1" data-desc="Anno e Km compaiono da soli quando filtri per anno o chilometri; le altre le aggiungi dal menu Colonne."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg></span><span>Colonne su misura</span></button>
+            <button class="fx-tab" role="tab" id="fxt2" aria-controls="fxp2" aria-selected="false" tabindex="-1" data-desc="Apri l'annuncio nella riga: galleria foto, scheda tecnica completa e link all'originale, senza saltare in cima."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg></span><span>Espandi i dettagli</span></button>
+            <button class="fx-tab" role="tab" id="fxt3" aria-controls="fxp3" aria-selected="false" tabindex="-1" data-desc="Metti i veicoli fianco a fianco: il valore migliore di ogni riga è evidenziato in verde."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><rect x="3" y="7" width="6" height="10" rx="1"/><rect x="15" y="7" width="6" height="10" rx="1"/></svg></span><span>Confronta più annunci</span></button>
+            <button class="fx-tab" role="tab" id="fxt4" aria-controls="fxp4" aria-selected="false" tabindex="-1" data-desc="Tieni gli annunci che ti piacciono e salva le ricerche: ricevi avvisi su nuovi annunci e cali di prezzo."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span><span>Salva annunci e ricerche</span></button>
+            <button class="fx-tab" role="tab" id="fxt5" aria-controls="fxp5" aria-selected="false" tabindex="-1" data-desc="Un report stampabile o un foglio per Excel, generati al volo dai risultati della ricerca."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><span>Report PDF e CSV</span></button>
+            <button class="fx-tab" role="tab" id="fxt6" aria-controls="fxp6" aria-selected="false" tabindex="-1" data-desc="Risultati che non ti convincono? Mandaci una segnalazione, allegando la ricerca con un clic."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/></svg></span><span>Segnala una ricerca</span></button>
+            <button class="fx-tab" role="tab" id="fxt7" aria-controls="fxp7" aria-selected="false" tabindex="-1" data-desc="Piccoli punti interrogativi spiegano ogni parte dell'app. Li nascondi quando vuoi dalla navbar."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3 2.4c-.7.3-1 .8-1 1.6"/><path d="M12 17h.01"/></svg></span><span>Aiuti interattivi</span></button>
+            <button class="fx-tab" role="tab" id="fxt8" aria-controls="fxp8" aria-selected="false" tabindex="-1" data-desc="Interfaccia leggibile di giorno, riposante di notte. La stessa lista, due temi."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span>Tema chiaro e scuro</span></button>
+            <button class="fx-tab" role="tab" id="fxt9" aria-controls="fxp9" aria-selected="false" tabindex="-1" data-desc="Assistenza diretta su WhatsApp: aggiungere una fonte, segnalare un problema o una richiesta su misura."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"/></svg></span><span>Pronto intervento</span></button>
+          </div>
+
+          <div class="fx-stage">
+            <div class="appwin">
+              <div class="appwin-bar" aria-hidden="true"><span class="awd"></span><span class="awd"></span><span class="awd"></span><span class="appwin-title">Auto Moto Radar</span></div>
+              <div class="appwin-body">
+
+                <div class="fx-panel" role="tabpanel" id="fxp0" aria-labelledby="fxt0"><div aria-hidden="true">
+                  <div class="search-form">
+                    <div class="seg-toggle"><span class="seg on">Auto</span><span class="seg">Moto</span></div>
+                    <div class="search-fields"><div class="field-input">BMW</div><div class="field-input">320d Touring</div><span class="btn-cerca">Cerca</span></div>
+                    <div class="adv-toggle">Filtri avanzati ▴</div>
+                    <div class="adv-grid">
+                      <div class="adv-field"><span>Prezzo min (€)</span><div class="inp">8.000</div></div>
+                      <div class="adv-field"><span>Prezzo max (€)</span><div class="inp">16.000</div></div>
+                      <div class="adv-field"><span>Anno da</span><div class="inp">2015</div></div>
+                      <div class="adv-field"><span>Anno a</span><div class="inp empty">—</div></div>
+                      <div class="adv-field"><span>Km min</span><div class="inp empty">—</div></div>
+                      <div class="adv-field"><span>Km max</span><div class="inp">120.000</div></div>
+                      <div class="adv-field"><span>Regione</span><div class="inp">Lombardia</div></div>
+                      <div class="adv-field"><span>Raggio km (Autoscout)</span><div class="inp">100</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp1" aria-labelledby="fxt1" hidden><div aria-hidden="true">
+                  <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start">
+                    <div class="tb-cols-menu">
+                      <label><span class="ck on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-9"/></svg></span> Anno</label>
+                      <label><span class="ck on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-9"/></svg></span> Km</label>
+                      <label><span class="ck"></span> Carburante</label>
+                      <label><span class="ck"></span> Potenza (CV)</label>
+                    </div>
+                    <div style="flex:1; min-width:260px">
+                      <div class="grid-head" style="grid-template-columns:minmax(0,1fr) 64px 98px 124px"><span class="gh">Veicolo</span><span class="gh gh-num">Anno</span><span class="gh gh-num">Km</span><span class="gh gh-num">Prezzo</span></div>
+                      <div class="result-list">
+                        <div class="result-row best" style="grid-template-columns:minmax(0,1fr) 64px 98px 124px"><div class="row-titolo">BMW 320d Touring</div><div class="row-cell num muted">2017</div><div class="row-cell num muted">92.000</div><div class="row-prezzo">€ 12.500</div></div>
+                        <div class="result-row" style="grid-template-columns:minmax(0,1fr) 64px 98px 124px"><div class="row-titolo">BMW 320d Touring</div><div class="row-cell num muted">2016</div><div class="row-cell num muted">118.000</div><div class="row-prezzo">€ 13.400</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp2" aria-labelledby="fxt2" hidden><div aria-hidden="true">
+                  <div class="result-row detail-open" style="grid-template-columns:120px minmax(0,1fr) 124px 96px">
+                    <div class="row-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+                    <div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Milano <span class="vend-badge vend-priv">Privato</span></div></div>
+                    <div class="row-prezzo">€ 12.500</div>
+                    <div class="row-fonte"><span class="tag tag-subito">Fonte A</span></div>
+                  </div>
+                  <div class="row-detail"><div class="det-inner">
+                    <div class="det-gallery">
+                      <span class="det-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
+                      <span class="det-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
+                      <span class="det-thumb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
+                    </div>
+                    <div class="det-specs">
+                      <div class="det-spec"><span class="det-k">Versione</span><span class="det-v">2.0d xDrive Luxury</span></div>
+                      <div class="det-spec"><span class="det-k">Cambio</span><span class="det-v">Automatico</span></div>
+                      <div class="det-spec"><span class="det-k">Cilindrata</span><span class="det-v">1.995 cc</span></div>
+                      <div class="det-spec"><span class="det-k">Potenza</span><span class="det-v">190 CV</span></div>
+                      <div class="det-spec"><span class="det-k">Carrozzeria</span><span class="det-v">Station Wagon</span></div>
+                      <div class="det-spec"><span class="det-k">Proprietari</span><span class="det-v">1</span></div>
+                    </div>
+                    <div class="det-foot">
+                      <span class="det-open">Apri annuncio ↗</span>
+                      <span class="det-act attivo"><svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg> Salvato</span>
+                      <span class="det-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg> Confronta</span>
+                    </div>
+                  </div></div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp3" aria-labelledby="fxt3" hidden><div aria-hidden="true">
+                  <div class="cmatrix-panel">
+                    <div class="cmatrix-head"><span class="cmatrix-title">Confronto · 3 annunci</span><span aria-hidden="true">✕</span></div>
+                    <div class="cmatrix-scroll"><table class="cmatrix">
+                      <thead><tr><th class="cm-label"></th><th><div class="cm-coltitle">BMW 320d · Milano</div></th><th><div class="cm-coltitle">BMW 320d · Bologna</div></th><th><div class="cm-coltitle">BMW 320d · Torino</div></th></tr></thead>
+                      <tbody>
+                        <tr><td class="cm-label">Prezzo</td><td class="cm-val cm-best">€ 12.500 ★</td><td class="cm-val">€ 13.400</td><td class="cm-val">€ 14.900</td></tr>
+                        <tr><td class="cm-label">Anno</td><td class="cm-val">2017</td><td class="cm-val">2016</td><td class="cm-val cm-best">2018 ★</td></tr>
+                        <tr><td class="cm-label">Km</td><td class="cm-val">92.000</td><td class="cm-val">118.000</td><td class="cm-val cm-best">76.000 ★</td></tr>
+                        <tr><td class="cm-label">Carburante</td><td class="cm-val">Diesel</td><td class="cm-val">Diesel</td><td class="cm-val">Diesel</td></tr>
+                        <tr><td class="cm-label">Potenza</td><td class="cm-val cm-best">190 CV ★</td><td class="cm-val">184 CV</td><td class="cm-val cm-best">190 CV ★</td></tr>
+                        <tr><td class="cm-label">Cambio</td><td class="cm-val">Automatico</td><td class="cm-val">Manuale</td><td class="cm-val">Automatico</td></tr>
+                      </tbody>
+                    </table></div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp4" aria-labelledby="fxt4" hidden><div aria-hidden="true">
+                  <div class="saved-tabs"><span class="saved-tab on">Annunci <span class="cnt">3</span></span><span class="saved-tab">Ricerche <span class="cnt">2</span></span></div>
+                  <div class="salvato-item"><div><div class="salvato-titolo">BMW 320d Touring</div><div class="salvato-dettagli">€ 12.500 · 92.000 km · 2017</div></div><span class="tb-btn">Rimuovi</span></div>
+                  <div class="ric-card has-novita" style="margin-top:12px">
+                    <div class="ric-title">BMW 320d Touring <span class="ric-badge">4</span></div>
+                    <div class="ric-sub">auto · controllata 2 ore fa</div>
+                    <div class="ric-digest">4 novità: 3 nuovi annunci, 1 calo di prezzo</div>
+                    <div class="ric-alerts">
+                      <div class="ric-alert ric-nuovo"><span class="ric-motivo">nuovo</span><span class="ric-alert-tit">BMW 320d Touring Luxury · Monza</span><span class="ric-alert-prezzo">€ 13.100</span></div>
+                      <div class="ric-alert ric-calo"><span class="ric-motivo">calo</span><span class="ric-alert-tit">BMW 320d Touring Sport · Bologna</span><span class="ric-alert-prezzo">€ 12.900</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp5" aria-labelledby="fxt5" hidden><div aria-hidden="true">
+                  <div class="rep">
+                    <div class="rep-band"><b>AUTO MOTO RADAR</b><span>BMW 320d Touring · 120 annunci · 19/06/2026</span></div>
+                    <div class="rep-metrics">
+                      <div class="rep-metric"><div class="l">Min</div><div class="v">€ 12.500</div></div>
+                      <div class="rep-metric"><div class="l">Mediana</div><div class="v">€ 13.900</div></div>
+                      <div class="rep-metric"><div class="l">Media</div><div class="v">€ 14.050</div></div>
+                      <div class="rep-metric"><div class="l">Max</div><div class="v">€ 15.200</div></div>
+                    </div>
+                    <div class="rep-rows">
+                      <div><span>BMW 320d Touring · Milano</span><span>€ 12.500</span></div>
+                      <div><span>BMW 320d Touring · Bologna</span><span>€ 13.400</span></div>
+                      <div><span>BMW 320d Touring · Torino</span><span>€ 14.900</span></div>
+                    </div>
+                  </div>
+                  <div class="rep-export"><span class="tb-btn">CSV</span><span class="tb-btn">PDF</span></div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp6" aria-labelledby="fxt6" hidden><div aria-hidden="true">
+                  <div class="report-card">
+                    <div class="report-head"><span>Segnala un problema</span><span aria-hidden="true">✕</span></div>
+                    <div class="report-ta">Descrivi il problema, o cosa non ti convince dei risultati…</div>
+                    <label class="report-attach"><span class="ck on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-9"/></svg></span> Allega la ricerca attuale (utile per dire che i risultati non sono ideali)</label>
+                    <div class="report-foot"><span class="report-send">Invia</span></div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp7" aria-labelledby="fxt7" hidden><div aria-hidden="true">
+                  <div class="help-ctx">
+                    <div class="results-toolbar">
+                      <span class="tb-label">Raggruppa <span class="help-dot">?</span></span>
+                      <span class="tb-sep"></span>
+                      <span class="tb-label">Prezzo <span class="help-dot">?</span></span>
+                      <span class="tb-sep"></span>
+                      <span class="tb-label hc-active">Esporta <span class="help-dot on">?</span></span>
+                    </div>
+                    <div class="help-tip hc-tip">Esporta i risultati: PDF stampabile o CSV per Excel. Niente account, niente attese.</div>
+                    <p class="fx-cap">I punti <span class="help-dot">?</span> spiegano ogni funzione, dritti dove servono. Mostrali o nascondili dall'icona in alto a destra dell'app.</p>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp8" aria-labelledby="fxt8" hidden><div aria-hidden="true">
+                  <div class="theme-split">
+                    <div class="theme-pane force-light">
+                      <div class="pane-lab">☀ Chiaro</div>
+                      <div class="results-toolbar ts-bar"><span class="tb-count">120 risultati</span><span class="tb-stat"><span class="tb-stat-label">min</span><b>€ 12.500</b></span></div>
+                      <div class="result-list">
+                        <div class="result-row best" style="grid-template-columns:minmax(0,1fr) auto"><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Milano · 2017</div></div><div class="row-prezzo">€ 12.500</div></div>
+                        <div class="result-row" style="grid-template-columns:minmax(0,1fr) auto"><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Torino · 2016</div></div><div class="row-prezzo">€ 13.400</div></div>
+                      </div>
+                    </div>
+                    <div class="theme-pane force-dark">
+                      <div class="pane-lab">☾ Scuro</div>
+                      <div class="results-toolbar ts-bar"><span class="tb-count">120 risultati</span><span class="tb-stat"><span class="tb-stat-label">min</span><b>€ 12.500</b></span></div>
+                      <div class="result-list">
+                        <div class="result-row best" style="grid-template-columns:minmax(0,1fr) auto"><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Milano · 2017</div></div><div class="row-prezzo">€ 12.500</div></div>
+                        <div class="result-row" style="grid-template-columns:minmax(0,1fr) auto"><div class="row-main"><div class="row-titolo">BMW 320d Touring</div><div class="row-sub">Torino · 2016</div></div><div class="row-prezzo">€ 13.400</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <div class="fx-panel" role="tabpanel" id="fxp9" aria-labelledby="fxt9" hidden><div>
+                  <div class="pronto">
+                    <div class="pronto-head">
+                      <span class="wa-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"/></svg></span>
+                      <div><h4>Pronto intervento</h4><p>Assistenza diretta su WhatsApp, quando ti serve.</p></div>
+                    </div>
+                    <div class="chat">
+                      <div class="bubble bubble-in">Ciao! Come possiamo aiutarti?</div>
+                      <div class="bubble bubble-out">Vorrei aggiungere una fonte alla mia ricerca</div>
+                    </div>
+                    <div class="pronto-opts">
+                      <span class="pronto-chip">Assistenza rapida</span>
+                      <span class="pronto-chip">Segnala un problema</span>
+                      <span class="pronto-chip">Richiesta su misura</span>
+                    </div>
+                    <a class="btn btn-primary" href="https://wa.me/393520727252" target="_blank" rel="noopener">Apri la chat su WhatsApp</a>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+            </div>
+            <p class="fx-stage-cap" id="fxCap" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Roadmap (timeline prossimi obiettivi) ────────────────────────── -->
+    <section id="roadmap">
+      <div class="wrap">
+        <p class="eyebrow">In arrivo</p>
+        <h2>Dove stiamo andando</h2>
+        <p class="section-intro">Quello su cui stiamo lavorando ora. Sono direzioni, non promesse con una data.</p>
+        <ol class="timeline">
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <span class="tl-status st-test">In test</span>
+            <h3>Storico annunci</h3>
+            <p>Stiamo testando un database che conserva la storia di ogni annuncio nel tempo.</p>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <span class="tl-status st-dev">In sviluppo</span>
+            <h3>Variazioni di prezzo</h3>
+            <p>Tracciare i cali e gli aumenti di prezzo su ogni singolo veicolo nel tempo.</p>
+          </li>
+          <li class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <span class="tl-status st-study">In studio</span>
+            <h3>Ricerche di mercato</h3>
+            <p>Analisi sui grandi numeri dell'usato in Italia, per leggere i trend reali.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-cta">
+      <div class="wrap footer-cta-inner">
+        <div>
+          <p class="footer-cta-h">Pronto a partire?</p>
+          <p class="footer-cta-sub">Accesso su invito. Dicci chi sei e ti rispondiamo direttamente su WhatsApp.</p>
+        </div>
+        <a class="btn footer-cta-btn" href="https://wa.me/393520727252" data-open-wizard>Richiedi accesso</a>
+      </div>
+    </div>
+    <div class="footer-main">
+      <div class="footer-watermark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="13.5" fill="none" stroke="#fff" stroke-width="0.9"/>
+          <circle cx="16" cy="16" r="8.5" fill="none" stroke="#fff" stroke-width="0.9"/>
+          <circle cx="16" cy="16" r="3" fill="#fff"/>
+          <line x1="16" y1="2.5" x2="16" y2="6" stroke="#fff" stroke-width="0.9"/>
+          <line x1="29.5" y1="16" x2="26" y2="16" stroke="#fff" stroke-width="0.9"/>
+        </svg>
+      </div>
+      <div class="wrap footer-cols">
+        <div class="footer-brand-col">
+          <span class="brand">
+            <svg class="brand-logo" width="40" height="40" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="32" height="32" rx="6" fill="#1f6feb"/>
+              <circle cx="16" cy="16" r="10" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+              <circle cx="16" cy="16" r="5.5" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
+              <circle cx="16" cy="16" r="1.8" fill="#bfdbfe"/>
+            </svg>
+            <span class="brand-name">Auto Moto Radar</span>
+          </span>
+          <p class="footer-tag">Aggregatore di annunci auto e moto usate dalle principali fonti dell'usato in Italia, con stima del prezzo di mercato.</p>
+        </div>
+        <nav class="footer-col" aria-label="Sezioni del sito">
+          <p class="footer-col-h">Sezioni</p>
+          <a href="#come-funziona">Come funziona</a>
+          <a href="#funzioni">Funzioni</a>
+          <a href="#roadmap">Roadmap</a>
+        </nav>
+        <div class="footer-col">
+          <p class="footer-col-h">Contatti</p>
+          <a href="https://wa.me/393520727252" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://wa.me/393520727252" data-open-wizard>Richiedi accesso</a>
+        </div>
+      </div>
+      <div class="wrap footer-legal">Auto Moto Radar — aggregatore informativo di annunci usato. Accesso su invito.</div>
+    </div>
+  </footer>
+
+  <!-- Modal wizard di profilazione (aperto dai CTA "Richiedi accesso"). -->
+  <div class="modal" id="accessModal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wizTitle">
+      <button type="button" class="modal-x" data-close aria-label="Chiudi">✕</button>
+      <p class="wiz-kicker" id="wizTitle">Richiedi l'accesso</p>
+      <p class="wiz-progress" id="wizProgress" aria-live="polite">Passo 1 di 3</p>
+      <div id="wizMount"><!-- step renderizzato da JS --></div>
+      <noscript>
+        <p class="wiz-q">Richiedi l'accesso scrivendoci direttamente su WhatsApp.</p>
+        <a class="btn btn-primary" href="https://wa.me/393520727252" target="_blank" rel="noopener">Richiedi accesso su WhatsApp</a>
+      </noscript>
+    </div>
+  </div>
+
+  <script src="./landing.js"></script>
+</body>
+</html>
