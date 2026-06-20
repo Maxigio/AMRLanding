@@ -1,0 +1,5 @@
+# Crawl consentito: il "fuori da Google" lo dà <meta name="robots" content="noindex">
+# in index.html. NON usare Disallow: / (bloccherebbe la lettura del noindex e
+# l'anteprima Open Graph di Facebook/WhatsApp).
+User-agent: *
+Allow: /

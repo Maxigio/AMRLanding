@@ -201,6 +201,7 @@
     if (!tablist) return;
     var tabs = Array.prototype.slice.call(tablist.querySelectorAll('.fx-tab'));
     var cap = document.getElementById('fxCap');
+    var fxSelect = document.getElementById('fxSelect');   // nav alternativa su mobile
     var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
     var i = 0;
 
@@ -213,12 +214,16 @@
         if (panels[k]) panels[k].hidden = !on;    // pannelli inattivi fuori da tab/SR
       });
       if (cap) cap.textContent = tabs[i].getAttribute('data-desc') || '';
+      if (fxSelect && fxSelect.selectedIndex !== i) fxSelect.selectedIndex = i;  // sync select↔tab
       if (focus) { tabs[i].focus(); tabs[i].scrollIntoView({ block: 'nearest', inline: 'nearest' }); }
     }
 
     tabs.forEach(function (t, k) {
       t.addEventListener('click', function () { select(k, false); });
     });
+    if (fxSelect) {
+      fxSelect.addEventListener('change', function () { select(parseInt(fxSelect.value, 10) || 0, false); });
+    }
     tablist.addEventListener('keydown', function (e) {
       switch (e.key) {
         case 'ArrowDown': case 'ArrowRight': e.preventDefault(); select(i + 1, true); break;

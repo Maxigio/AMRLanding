@@ -4,10 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auto Moto Radar</title>
-  <meta name="description" content="Auto Moto Radar aggrega in una sola schermata gli annunci di auto e moto usate dalle principali fonti dell'usato in Italia, e ne stima il prezzo di mercato. Accesso su invito." />
+  <meta name="description" content="Auto Moto Radar aggrega auto e moto usate dalle fonti che scegli tu, per valutazioni e report di mercato. Strumento per commercianti e reparti vendita. Accesso su invito." />
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <meta name="theme-color" content="#f3f4f6" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+
+  <!-- Privato: fuori da Google (crawl consentito, ma non indicizzato). -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://ornate-meringue-35d18e.netlify.app/" />
+
+  <!-- Open Graph / Twitter: anteprima del link su WhatsApp e social (vale anche con noindex). -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Auto Moto Radar" />
+  <meta property="og:title" content="Auto Moto Radar — valutazioni e report dell'usato" />
+  <meta property="og:description" content="Aggrega auto e moto usate dalle fonti che scegli tu, per valutazioni e report di mercato. Strumento per commercianti e reparti vendita. Accesso su invito." />
+  <meta property="og:url" content="https://ornate-meringue-35d18e.netlify.app/" />
+  <meta property="og:image" content="https://ornate-meringue-35d18e.netlify.app/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Auto Moto Radar" />
+  <meta property="og:locale" content="it_IT" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Auto Moto Radar — valutazioni e report dell'usato" />
+  <meta name="twitter:description" content="Aggrega auto e moto usate dalle fonti che scegli tu, per valutazioni e report di mercato. Accesso su invito." />
+  <meta name="twitter:image" content="https://ornate-meringue-35d18e.netlify.app/og-image.jpg" />
+
   <!-- Tema applicato PRIMA del CSS per evitare il flash (light di default). Chiave propria
        della landing per non interferire con l'app. -->
   <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('amr_landing_theme')||'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}</script>
@@ -56,8 +77,8 @@
             <line x1="26" y1="16" x2="28.5" y2="16" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <h1>Auto Moto Radar</h1>
-          <p class="lead lead-1">Trova e valuta auto e moto in pochi minuti.</p>
-          <p class="lead lead-2">Aggrega in una sola schermata gli annunci dalle principali fonti dell'usato in Italia, e ne stima il prezzo di mercato sui dati reali del momento.</p>
+          <p class="lead lead-1">Trova, organizza e confronta dati per valutazioni e report di mercato.</p>
+          <p class="lead lead-2">Per commercianti, reparti commerciali e collaboratori poco esperti di tecnologia.</p>
           <div class="btn-row">
             <a class="btn btn-dark" href="#funzioni">Scopri tutte le funzionalità</a>
           </div>
@@ -97,8 +118,8 @@
     <section id="come-funziona">
       <div class="wrap">
         <p class="eyebrow">Come funziona</p>
-        <h2>Da tre siti a una lista</h2>
-        <p class="section-intro">Cercare un usato significa aprire siti diversi, ripetere la stessa ricerca e confrontare a mano. Auto Moto Radar fa il lavoro al posto tuo: unisce le fonti, ordina dal più economico ed evidenzia l'offerta migliore.</p>
+        <h2>Realizziamo valore aggregando auto e moto usate da fonti personalizzabili</h2>
+        <p class="section-intro">Odiamo i dati inutili, perciò basiamo il motore di ricerca sulle tue abitudini lavorative.</p>
 
         <div class="ba">
           <div class="ba-side ba-before">
@@ -109,9 +130,9 @@
               <div class="ba-win ba-win3"><div class="ba-win-bar">Fonte C</div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 13.400</span></div><div class="ba-win-row"><span>BMW 320d Touring</span><span>€ 14.200</span></div></div>
             </div>
             <ul class="ba-pts ba-pts-before">
-              <li>3 siti diversi</li>
-              <li>stessa ricerca ripetuta</li>
-              <li>confronto a mano</li>
+              <li>Troppi siti diversi</li>
+              <li>Infinite ricerche ripetute</li>
+              <li>Confronti possibili solo dentro la stessa fonte</li>
             </ul>
           </div>
 
@@ -150,13 +171,13 @@
             </div>
             <ul class="ba-pts ba-pts-after">
               <li>1 ricerca</li>
-              <li>1 lista ordinata</li>
-              <li>l'offerta migliore in evidenza</li>
+              <li>Interfaccia personalizzata</li>
+              <li>Accesso diretto agli annunci</li>
             </ul>
           </div>
         </div>
 
-        <p class="ba-impact">3 fonti <b>→</b> 1 vista · ordinati per prezzo · 0 schede da gestire</p>
+        <p class="ba-impact">Tutte le tue fonti <b>→</b> Organizzate in una lista · Report per clienti e collaboratori · Per tutti i dispositivi.</p>
       </div>
     </section>
 
@@ -164,19 +185,33 @@
     <section id="funzioni">
       <div class="wrap">
         <p class="eyebrow">Le funzioni</p>
-        <h2>Tutto quello che puoi fare</h2>
-        <p class="section-intro">Ogni funzione dell'app. Scegli una voce a sinistra per vederla all'opera.</p>
+        <h2>Sviluppiamo logiche di valore per la tua azienda</h2>
+        <p class="section-intro">Le funzioni che seguono sono le fondamenta del software; non includono le personalizzazioni che sviluppiamo su misura.</p>
 
         <div class="fx-explorer fx" id="fxExplorer">
+          <!-- Mobile (≤860px): la striscia di tab è inservibile col touch → menu a tendina. -->
+          <label class="fx-sr" for="fxSelect">Scegli una funzione da vedere</label>
+          <select id="fxSelect" class="fx-select">
+            <option value="0">Ricerca con filtri avanzati</option>
+            <option value="1">Colonne su misura</option>
+            <option value="2">Espandi i dettagli</option>
+            <option value="3">Confronta più annunci</option>
+            <option value="4">Salva annunci e ricerche</option>
+            <option value="5">Report PDF e CSV</option>
+            <option value="6">Segnala una ricerca</option>
+            <option value="7">Aiuti interattivi</option>
+            <option value="8">Tema chiaro e scuro</option>
+            <option value="9">Pronto intervento</option>
+          </select>
           <div class="fx-tabs" id="fxTabs" role="tablist" aria-label="Funzioni dell'app" aria-orientation="vertical">
-            <button class="fx-tab" role="tab" id="fxt0" aria-controls="fxp0" aria-selected="true" tabindex="0" data-desc="Marca e modello dalla lista, più i filtri che servono: prezzo, anno, chilometri, regione e raggio."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span>Ricerca con filtri avanzati</span></button>
-            <button class="fx-tab" role="tab" id="fxt1" aria-controls="fxp1" aria-selected="false" tabindex="-1" data-desc="Anno e Km compaiono da soli quando filtri per anno o chilometri; le altre le aggiungi dal menu Colonne."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg></span><span>Colonne su misura</span></button>
-            <button class="fx-tab" role="tab" id="fxt2" aria-controls="fxp2" aria-selected="false" tabindex="-1" data-desc="Apri l'annuncio nella riga: galleria foto, scheda tecnica completa e link all'originale, senza saltare in cima."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg></span><span>Espandi i dettagli</span></button>
-            <button class="fx-tab" role="tab" id="fxt3" aria-controls="fxp3" aria-selected="false" tabindex="-1" data-desc="Metti i veicoli fianco a fianco: il valore migliore di ogni riga è evidenziato in verde."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><rect x="3" y="7" width="6" height="10" rx="1"/><rect x="15" y="7" width="6" height="10" rx="1"/></svg></span><span>Confronta più annunci</span></button>
-            <button class="fx-tab" role="tab" id="fxt4" aria-controls="fxp4" aria-selected="false" tabindex="-1" data-desc="Tieni gli annunci che ti piacciono e salva le ricerche: ricevi avvisi su nuovi annunci e cali di prezzo."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span><span>Salva annunci e ricerche</span></button>
-            <button class="fx-tab" role="tab" id="fxt5" aria-controls="fxp5" aria-selected="false" tabindex="-1" data-desc="Un report stampabile o un foglio per Excel, generati al volo dai risultati della ricerca."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><span>Report PDF e CSV</span></button>
-            <button class="fx-tab" role="tab" id="fxt6" aria-controls="fxp6" aria-selected="false" tabindex="-1" data-desc="Risultati che non ti convincono? Mandaci una segnalazione, allegando la ricerca con un clic."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/></svg></span><span>Segnala una ricerca</span></button>
-            <button class="fx-tab" role="tab" id="fxt7" aria-controls="fxp7" aria-selected="false" tabindex="-1" data-desc="Piccoli punti interrogativi spiegano ogni parte dell'app. Li nascondi quando vuoi dalla navbar."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3 2.4c-.7.3-1 .8-1 1.6"/><path d="M12 17h.01"/></svg></span><span>Aiuti interattivi</span></button>
+            <button class="fx-tab" role="tab" id="fxt0" aria-controls="fxp0" aria-selected="true" tabindex="0" data-desc="Massima libertà nella ricerca. Vuoi filtri diversi? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span>Ricerca con filtri avanzati</span></button>
+            <button class="fx-tab" role="tab" id="fxt1" aria-controls="fxp1" aria-selected="false" tabindex="-1" data-desc="Personalizza le informazioni da tenere sott'occhio. Vuoi anche un sistema di rating? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg></span><span>Colonne su misura</span></button>
+            <button class="fx-tab" role="tab" id="fxt2" aria-controls="fxp2" aria-selected="false" tabindex="-1" data-desc="Annunci arricchibili di altre informazioni. Vuoi paragonarli col nuovo? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg></span><span>Espandi i dettagli</span></button>
+            <button class="fx-tab" role="tab" id="fxt3" aria-controls="fxp3" aria-selected="false" tabindex="-1" data-desc="Confronta e crea prospetti personalizzati. Vuoi una versione da usare con i clienti? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><rect x="3" y="7" width="6" height="10" rx="1"/><rect x="15" y="7" width="6" height="10" rx="1"/></svg></span><span>Confronta più annunci</span></button>
+            <button class="fx-tab" role="tab" id="fxt4" aria-controls="fxp4" aria-selected="false" tabindex="-1" data-desc="Salva annunci e ricerche e ricevi aggiornamenti. Li vuoi anche via WhatsApp? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg></span><span>Salva annunci e ricerche</span></button>
+            <button class="fx-tab" role="tab" id="fxt5" aria-controls="fxp5" aria-selected="false" tabindex="-1" data-desc="Un report stampabile dei mezzi confrontati e delle ricerche. Ne vuoi uno su misura per i clienti? Possiamo farlo!"><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></span><span>Report PDF e CSV</span></button>
+            <button class="fx-tab" role="tab" id="fxt6" aria-controls="fxp6" aria-selected="false" tabindex="-1" data-desc="Può capitare che una fonte cambi il proprio codice. Segnalaci dall'app le ricerche che non ti convincono."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/></svg></span><span>Segnala una ricerca</span></button>
+            <button class="fx-tab" role="tab" id="fxt7" aria-controls="fxp7" aria-selected="false" tabindex="-1" data-desc="Tutorial integrati, che puoi nascondere quando vuoi."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3 2.4c-.7.3-1 .8-1 1.6"/><path d="M12 17h.01"/></svg></span><span>Aiuti interattivi</span></button>
             <button class="fx-tab" role="tab" id="fxt8" aria-controls="fxp8" aria-selected="false" tabindex="-1" data-desc="Interfaccia leggibile di giorno, riposante di notte. La stessa lista, due temi."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></span><span>Tema chiaro e scuro</span></button>
             <button class="fx-tab" role="tab" id="fxt9" aria-controls="fxp9" aria-selected="false" tabindex="-1" data-desc="Assistenza diretta su WhatsApp: aggiungere una fonte, segnalare un problema o una richiesta su misura."><span class="fx-tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5Z"/></svg></span><span>Pronto intervento</span></button>
           </div>
@@ -199,7 +234,7 @@
                       <div class="adv-field"><span>Km min</span><div class="inp empty">—</div></div>
                       <div class="adv-field"><span>Km max</span><div class="inp">120.000</div></div>
                       <div class="adv-field"><span>Regione</span><div class="inp">Lombardia</div></div>
-                      <div class="adv-field"><span>Raggio km (Autoscout)</span><div class="inp">100</div></div>
+                      <div class="adv-field"><span>Raggio km</span><div class="inp">100</div></div>
                     </div>
                   </div>
                 </div>
@@ -213,7 +248,7 @@
                       <label><span class="ck"></span> Carburante</label>
                       <label><span class="ck"></span> Potenza (CV)</label>
                     </div>
-                    <div style="flex:1; min-width:260px">
+                    <div style="flex:1; min-width:0">
                       <div class="grid-head" style="grid-template-columns:minmax(0,1fr) 64px 98px 124px"><span class="gh">Veicolo</span><span class="gh gh-num">Anno</span><span class="gh gh-num">Km</span><span class="gh gh-num">Prezzo</span></div>
                       <div class="result-list">
                         <div class="result-row best" style="grid-template-columns:minmax(0,1fr) 64px 98px 124px"><div class="row-titolo">BMW 320d Touring</div><div class="row-cell num muted">2017</div><div class="row-cell num muted">92.000</div><div class="row-prezzo">€ 12.500</div></div>
@@ -384,27 +419,27 @@
     <!-- ─── Roadmap (timeline prossimi obiettivi) ────────────────────────── -->
     <section id="roadmap">
       <div class="wrap">
-        <p class="eyebrow">In arrivo</p>
+        <p class="eyebrow">PROSSIMI PASSI</p>
         <h2>Dove stiamo andando</h2>
-        <p class="section-intro">Quello su cui stiamo lavorando ora. Sono direzioni, non promesse con una data.</p>
+        <p class="section-intro">Il nostro obiettivo? Ricerche di mercato su vasta scala a portata di click.</p>
         <ol class="timeline">
           <li class="tl-item">
             <span class="tl-dot" aria-hidden="true"></span>
             <span class="tl-status st-test">In test</span>
             <h3>Storico annunci</h3>
-            <p>Stiamo testando un database che conserva la storia di ogni annuncio nel tempo.</p>
+            <p>Stiamo testando un database che conserva la storia di ogni annuncio nel tempo, permettendo di monitorare cambi di prezzo e condizioni.</p>
           </li>
           <li class="tl-item">
             <span class="tl-dot" aria-hidden="true"></span>
             <span class="tl-status st-dev">In sviluppo</span>
-            <h3>Variazioni di prezzo</h3>
-            <p>Tracciare i cali e gli aumenti di prezzo su ogni singolo veicolo nel tempo.</p>
+            <h3>Automazioni</h3>
+            <p>Abbiamo varie opzioni in sviluppo: dal chatbot WhatsApp che raccoglie messaggi e foto per trasformarli in una ricerca, fino a soluzioni su misura per i team tecnici.</p>
           </li>
           <li class="tl-item">
             <span class="tl-dot" aria-hidden="true"></span>
             <span class="tl-status st-study">In studio</span>
             <h3>Ricerche di mercato</h3>
-            <p>Analisi sui grandi numeri dell'usato in Italia, per leggere i trend reali.</p>
+            <p>Analisi sui grandi numeri dell'usato, in Italia, in Europa e nel mondo, per leggere i trend reali.</p>
           </li>
         </ol>
       </div>
@@ -440,6 +475,8 @@
               <circle cx="16" cy="16" r="10" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
               <circle cx="16" cy="16" r="5.5" fill="none" stroke="#bfdbfe" stroke-width="1.8"/>
               <circle cx="16" cy="16" r="1.8" fill="#bfdbfe"/>
+              <line x1="16" y1="6" x2="16" y2="3.5" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="26" y1="16" x2="28.5" y2="16" stroke="#bfdbfe" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
             <span class="brand-name">Auto Moto Radar</span>
           </span>
@@ -457,7 +494,7 @@
           <a href="https://wa.me/393520727252" data-open-wizard>Richiedi accesso</a>
         </div>
       </div>
-      <div class="wrap footer-legal">Auto Moto Radar — aggregatore informativo di annunci usato. Accesso su invito.</div>
+      <div class="wrap footer-legal">Auto Moto Radar — aggregatore informativo di annunci dell'usato. Accesso su invito.</div>
     </div>
   </footer>
 
@@ -467,7 +504,7 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="wizTitle">
       <button type="button" class="modal-x" data-close aria-label="Chiudi">✕</button>
       <p class="wiz-kicker" id="wizTitle">Richiedi l'accesso</p>
-      <p class="wiz-progress" id="wizProgress" aria-live="polite">Passo 1 di 3</p>
+      <p class="wiz-progress" id="wizProgress" aria-live="polite">Passo 1 di 4</p>
       <div id="wizMount"><!-- step renderizzato da JS --></div>
       <noscript>
         <p class="wiz-q">Richiedi l'accesso scrivendoci direttamente su WhatsApp.</p>

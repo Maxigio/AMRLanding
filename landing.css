@@ -71,6 +71,7 @@ body {
   line-height: 1.55;
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;   /* guardia anti scroll-x (clip non rompe la topbar sticky) */
 }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -117,11 +118,12 @@ section[id] { scroll-margin-top: 72px; }
   background: var(--bg);
   border-bottom: 1px solid var(--line);
 }
-.brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; min-width: 0; }
 .brand:hover { text-decoration: none; }
-.brand .brand-logo { display: block; border-radius: var(--r); }
+.brand .brand-logo { display: block; border-radius: var(--r); flex: none; }
 .brand .brand-name {
   font-size: 1.02rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .topbar-spacer { flex: 1; }
 /* Link di navigazione fra le sezioni (accessibilità). Sotto 720px collassano: vedi media. */
@@ -235,7 +237,9 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
 .hd-field { display: flex; align-items: center; min-height: 44px; }
 .hd-caret { display: inline-block; width: 2px; height: 1.05em; background: var(--accent); margin-left: 2px; animation: hd-blink 1.05s step-end infinite; }
 @keyframes hd-blink { 50% { opacity: 0; } }
-.hd-results { min-height: 296px; }   /* spazio riservato (single-list) → niente salto nel loop */
+/* Altezza FISSA (non min-height): la fase "typing" (liste hidden) e l'esito devono
+   occupare lo stesso spazio, altrimenti la pagina sobbalza a ogni ciclo del loop. */
+.hd-results { height: 312px; overflow: hidden; }
 /* La lista nascosta deve sparire davvero: .fx .result-list{display:flex} sovrasta [hidden]. */
 .fx .result-list[hidden] { display: none; }
 /* Dropdown autocomplete (mirror app), copiato scopato .fx. */
@@ -428,6 +432,14 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
 .fx-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .fx-explorer { display: grid; grid-template-columns: 290px 1fr; gap: 22px; align-items: start; }
 .fx-tabs { display: flex; flex-direction: column; gap: 4px; max-height: 430px; overflow-y: auto; }
+/* Selettore funzioni: nascosto su desktop (si usano le tab), mostrato su mobile (vedi @860). */
+.fx-select {
+  display: none; width: 100%; box-sizing: border-box;
+  padding: 11px 12px; font: inherit; font-weight: 600;
+  color: var(--text); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--r); cursor: pointer;
+}
+.fx-select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .fx-tab {
   display: flex; align-items: center; gap: 11px; text-align: left; width: 100%;
   padding: 10px 12px; border: 1px solid transparent; border-radius: var(--r);
@@ -453,10 +465,10 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
 
 @media (max-width: 860px) {
   .fx-explorer { grid-template-columns: 1fr; gap: 14px; }
-  /* lista → striscia tab orizzontale (overflow solo qui, mai sul body) */
-  .fx-tabs { flex-direction: row; overflow-x: auto; overflow-y: visible; max-height: none; gap: 8px; padding-bottom: 4px; }
-  .fx-tab { flex: 0 0 auto; white-space: nowrap; }
-  .fx-tab-ico { display: none; }
+  /* La striscia di tab orizzontale è inservibile col touch (scrollWidth ~3300px):
+     su mobile la sostituisce un menu a tendina nativo. */
+  .fx-tabs { display: none; }
+  .fx-select { display: block; }
   .appwin-body { height: auto; min-height: 400px; }
 }
 
@@ -720,10 +732,9 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
 .footer-brand-col .brand { display: inline-flex; align-items: center; gap: 9px; }
 .footer-brand-col .brand { gap: 11px; }
 .footer-brand-col .brand-name { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; color: #fff; }
-/* Logo: tile bianca con radar blu (visibile sul footer blu). */
-.footer .brand-logo rect { fill: #fff; }
-.footer .brand-logo circle, .footer .brand-logo line { stroke: #1f6feb; }
-.footer .brand-logo circle[fill] { fill: #1f6feb; }
+/* Logo canonico (anelli + antenna): riquadro trasparente → sul footer blu resta
+   il radar azzurro #bfdbfe, coerente con navbar/hero. */
+.footer .brand-logo rect { fill: transparent; }
 .footer-tag { margin: 12px 0 14px; color: rgba(255, 255, 255, .85); font-size: 0.9rem; max-width: 42ch; }
 .footer-col-h { margin: 0 0 10px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255, 255, 255, .7); }
 .footer-col a { display: block; padding: 5px 0; color: rgba(255, 255, 255, .9); font-weight: 600; }
@@ -732,6 +743,11 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
 @media (max-width: 700px) {
   .footer-cta-inner { flex-direction: column; align-items: flex-start; }
   .footer-cols { grid-template-columns: 1fr; gap: 22px; }
+}
+/* Watermark 320px con `right:-36px`: sborda 36px a destra del footer. Su desktop largo
+   è filigrana intenzionale (clippata), ma fino a 860px (phone/tablet) bleeda → via. */
+@media (max-width: 860px) {
+  .footer-watermark { display: none; }
 }
 
 /* ─── Responsive ────────────────────────────────────────────────────────────── */
@@ -742,7 +758,22 @@ h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: -0.01em; margin: 0 0
   /* Link nav collassano: restano CTA + toggle; il footer garantisce i link (fallback a11y). */
   .topnav { display: none; }
 }
+/* iPhone SE & affini: restringo CTA e gap così logo+nome+CTA+toggle restano su una riga. */
+@media (max-width: 430px) {
+  .topbar { gap: 8px; padding: 10px 12px; }
+  .topbar-cta { padding: 7px 12px; font-size: 0.85rem; }
+  .theme-toggle { width: 32px; height: 32px; }
+  .brand .brand-name { font-size: 0.9rem; }
+}
 @media (max-width: 480px) {
-  .footer-inner { gap: 12px; }
   .brand .brand-name { font-size: 0.95rem; }
+  /* Lista compatta (244px): altezza riservata coerente, niente sobbalzo. */
+  .hd-results { height: 248px; }
+  /* Hero demo: riga compatta (le colonne fisse 84/104/80 venivano tagliate dall'.appwin). */
+  .hero-demo .result-row { grid-template-columns: 60px minmax(0,1fr) auto !important; gap: 10px; }
+  .hero-demo .row-thumb { height: 60px; }
+  .hero-demo .row-fonte { display: none; }
+  /* Explorer "Espandi i dettagli": riga compatta, niente scroll-x interno. */
+  #fxp2 .result-row { grid-template-columns: 84px minmax(0,1fr) auto !important; }
+  #fxp2 .row-fonte { display: none; }
 }

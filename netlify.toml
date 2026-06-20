@@ -1,0 +1,41 @@
+# Auto Moto Radar — landing statica. Nessun build: si pubblica la cartella così com'è.
+[build]
+  publish = "."
+  command = ""
+
+# Header di sicurezza per tutte le risorse.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=31536000"
+    # CSP: script-src include l'hash dello <script> inline (theme-flash, identico in index.html e 404.html).
+    # Se quello script cambia anche di un byte, ricalcolare l'hash o la pagina si rompe.
+    Content-Security-Policy = "default-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'sha256-xpv64ojUUOz9wDuhDmfkRL1h2ZeCluTsOGD6qAqpsPA='; font-src 'self'; connect-src 'none'"
+
+# Nomi file senza hash di contenuto → HTML/CSS/JS devono rivalidare (niente stale dopo un redeploy).
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Immagini/icone stabili: cache lunga.
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
